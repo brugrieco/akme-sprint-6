@@ -1,6 +1,6 @@
 const jsonDB = require('../model/jsonDatabase');
 const usersModel = jsonDB ('users')
-let db = require("../dataBase/models")
+let db = require("../database/models")
 
 async function userLoggedMiddleware (req,res,next) {
 

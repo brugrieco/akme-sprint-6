@@ -4,11 +4,11 @@ const path = require('path');
 const db = require('../dataBase/models')
 
 
-const productsJSON = fs.readFileSync(path.resolve(__dirname, '../database/products.json'), 'utf8');
-const products = JSON.parse(productsJSON);
+// const productsJSON = fs.readFileSync(path.resolve(__dirname, '../database/products.json'), 'utf8');
+// const products = JSON.parse(productsJSON);
 
-const jsonDB = require('../model/jsonDatabase.js');
-const productModel = jsonDB('products');
+// const jsonDB = require('../model/jsonDatabase.js');
+// const productModel = jsonDB('products');
 const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
 controller = {

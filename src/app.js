@@ -5,9 +5,9 @@ const methodOverride = require('method-override')
 const session = require('express-session')
 const cookies = require('cookie-parser')
 const userLoggedMiddleware = require('./middleware/userLoggedMiddleware')
-const productsRouter = require('./routes/productsRouter.js');
-const usersRouter = require('./routes/usersRouter.js');
-const mainRouter = require('./routes/mainRouter.js');
+const productsRouter = require('./routes/productsRouter');
+const usersRouter = require('./routes/usersRouter');
+const mainRouter = require('./routes/mainRouter');
 
 const port = 3000;
 
@@ -27,27 +27,24 @@ app.use(session({
 app.use(cookies())
 app.use(userLoggedMiddleware)
 
-// app.use('/', mainRouter);
-// app.use('/products', productsRouter);
-// app.use('/users', usersRouter);
-
-// app.listen(process.env.PORT || port, () => console.log(`servidor funcionando en el puerto ${port}! `))
-
-const express = require('express');
-const app = express();
-
-app.use(express.static('public'));
-
-app.listen(process.env.PORT || 3000, () => {console.log('listening on port 3000');});
-
 app.use('/', mainRouter);
+app.use('/products', productsRouter);
+app.use('/users', usersRouter);
+
+app.listen(process.env.PORT || port, () => console.log(`servidor funcionando en el puerto ${port}! `))
 
 
 
+// const express = require('express');
+// const app = express();
 
+// app.use(express.static('public'));
 
+// app.listen(process.env.PORT || 3000, () => {console.log('listening on port 3000');});
 
-
+// app.get('/', (req, res) => {
+//     res.send('mi server funcionando');
+// })
 
 
 

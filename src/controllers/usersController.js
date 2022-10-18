@@ -7,7 +7,7 @@ const usersModel = jsonDB ('users')
 const users = jsonDB('users') 
 
 const { validationResult } = require('express-validator');
-const db = require('../database/models');
+const db = require('../dataBase/models');
 
 const controller = {
 

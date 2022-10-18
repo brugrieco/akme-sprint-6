@@ -1,7 +1,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const db = require('../database/models')
+const db = require('../dataBase/models')
 
 
 const productsJSON = fs.readFileSync(path.resolve(__dirname, '../database/products.json'), 'utf8');

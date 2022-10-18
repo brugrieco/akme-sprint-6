@@ -9,7 +9,7 @@ const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 const { validationResult } = require('express-validator')
 
 
-const db  = require("../database/models");
+const db  = require("../dataBase/models");
 const { Op } = require("sequelize");
 
 const moment = require("moment");

@@ -14,7 +14,7 @@ const controller = {
     register: async (req,res) => {
 
 		try {
-			let roles = await db.Roles.findAll();
+			let roles = await db.Role.findAll();
 
 			res.render('users/register', {roles})
 		
@@ -27,7 +27,7 @@ const controller = {
 
 		try {
 
-        const users = await db.Users.findAll({include: [db.Roles]});
+        const users = await db.User.findAll({include: [db.Role]});
         
 		res.render('users/usersList', {users})
 
@@ -41,7 +41,7 @@ const controller = {
 		try {
 
         	const id = +req.params.id;
-        	let user = await db.Users.findByPk(id,{include: [db.Roles]})
+        	let user = await db.User.findByPk(id,{include: [db.Role]})
         	res.render('users/userDetail', {user})
     	
 		} catch (error) {
@@ -55,8 +55,8 @@ const controller = {
 
 		try {
         const id = +req.params.id;
-        const users = await db.Users.findByPk(id)
-		const roles = await db.Roles.findAll()
+        const users = await db.User.findByPk(id)
+		const roles = await db.Role.findAll()
 
         res.render('users/userEdit', {users, roles})
     
@@ -81,7 +81,7 @@ const controller = {
 
 			try {
 
-            let userToFind = await db.Users.findOne ({where:{email : req.body.email}})
+            let userToFind = await db.User.findOne ({where:{email : req.body.email}})
 
             if(userToFind){
 				if (req.file) {
@@ -103,14 +103,14 @@ const controller = {
 			let user = {
 				...req.body,
 				password: bcrypt.hashSync(req.body.password, 10),
-				roles_Id: 2,
+				roleId: 2,
 				celular: req.body.celular,
 				image: req.file !== undefined ? req.file.filename : "default-user-image.png"
 			}
 
 			console.log(user)
 
-			let newUser = await db.Users.create(user)
+			let newUser = await db.User.create(user)
 
 		///
 //
@@ -137,16 +137,15 @@ const controller = {
 		try {
 
 		let id = Number(req.params.id);
-		let userToEdit = await db.Users.findByPk(id);
+		let userToEdit = await db.User.findByPk(id);
 
 		userToEdit = {
 			id: userToEdit.id,
 			...req.body,
-			image: req.file !== undefined ? req.file.filename : "default-user-image.png"
-			
+			image: req.file !== undefined ? req.file.filename : "default-user-image.png"			
 		}
 
-		await db.Users.update(userToEdit, {where:{id:id}})
+		await db.User.update(userToEdit, {where:{id:id}})
 		res.redirect("/users/users");
 	
 		} catch (error) {
@@ -164,7 +163,7 @@ const controller = {
 
 		try {
 
-		let userToLogin = await db.Users.findOne ({where: {"email": req.body.email}})
+		let userToLogin = await db.User.findOne ({where: {"email": req.body.email}})
 		if (userToLogin) {
 			let passwordOk = bcrypt.compareSync (req.body.password, userToLogin.password)
 			if (passwordOk) {

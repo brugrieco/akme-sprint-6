@@ -20,7 +20,7 @@
                 <% } %>
             <%}%>
                 <label for="firstName" class="form-label">Nombre</label>
-                <input type="text" name="firstName" id="firstName" value= <%= locals.oldData ? oldData.firstName : null %>> 
+                <input type="text" name="first_name" id="firstName" value= <%= locals.oldData ? oldData.firstName : null %>> 
                 <% if (locals.errors && errors.firstName) { %>
                     <p class = "errorMessage"> <%= errors.firstName.msg %> </p>
                 <% } %>
@@ -28,7 +28,7 @@
 
             <div class="form-div">
                 <label for="lastName" class="form-label">Apellido</label>
-                <input type="text" name="lastName" id="lastName" value= <%= locals.oldData ? oldData.lastName : null %>>
+                <input type="text" name="last_name" id="lastName" value= <%= locals.oldData ? oldData.lastName : null %>>
                 <% if (locals.errors && errors.lastName) { %>
                     <p class = "errorMessage"> <%= errors.lastName.msg %> </p>
                 <% } %>

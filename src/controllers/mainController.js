@@ -16,13 +16,13 @@ controller = {
     index : async (req,res) => {
         try {
 
-        const products = await db.Products.findAll({include: [db.Images]});  
+        const products = await db.Product.findAll({include: [db.Image]});  
           
         res.render('main/index',{products,toThousand});
     
         } catch (error) {
             res.status(500).json({ error: error.message });
-    }
+        }
     
     },
 

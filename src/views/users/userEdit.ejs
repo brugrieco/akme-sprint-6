@@ -16,12 +16,12 @@
 
             <div class="form-div">
                 <label for="firstName" class="form-label">Nombre</label>
-                <input type="text" name="firstName" id="firstName" value= "<%= users.firstName %>" required>
+                <input type="text" name="first_name" id="firstName" value= "<%= users.firstName %>" required>
             </div>   
             
             <div class="form-div">
                 <label for="lastName" class="form-label">Apellido</label>
-                <input type="text" name="lastName" id="lastName" value= "<%= users.lastName %>" required>
+                <input type="text" name="last_name" id="lastName" value= "<%= users.lastName %>" required>
             </div>               
         
             <div class="form-div">
@@ -42,7 +42,7 @@
             <div class="form-div">
                 <div>
                 <label>Rol</label>
-            <select name="roles_Id" id="roles_Id">
+            <select name="roled" id="roles_Id">
                 <% for (let i = 0; i < roles.length; i++) {%> 
                     <option value="<%=roles[i].id%>">
                         <%=roles[i].name%>

@@ -1,9 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 
-const jsonDB = require('../model/jsonDatabase');
-const productModel = jsonDB ('products')
-const products = jsonDB('products') 
+// const jsonDB = require('../model/jsonDatabase');
+// const productModel = jsonDB ('products')
+// const products = jsonDB('products') 
 const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
 const { validationResult } = require('express-validator')
@@ -25,31 +25,30 @@ const controller = {
 
         try {
             
-           // const imagenes = await db.Images.findAll()
-            const productos = await db.Products.findAll ({include: [db.Images]});
+           // const imagenes = await db.Image.findAll()
+            const productos = await db.Product.findAll ({include: [db.Image]});
 
             productos.forEach(producto => {
 
             console.log(producto.Images[0].name)
+            
 
 
             })
 
             return res.render('products/products', {productos, toThousand})
         } 
+
 		catch (error) {
             res.json(error.message)
-        }
-
-
-		
+        }		
     },
 
     detail: async (req,res) => {
         try{
 
             const id = +req.params.id;
-            const product = await db.Products.findByPk(id, {include: [db.Images]});
+            const product = await db.Product.findByPk(id, {include: [db.Image]});
 
             res.render('products/productDetail', {product,toThousand})
         
@@ -103,7 +102,7 @@ const controller = {
 
 			let productImages = []
 
-            let newProduct = await db.Products.create(objAux);
+            let newProduct = await db.Product.create(objAux);
 
 
 
@@ -114,7 +113,7 @@ const controller = {
                 })
             }
                 if (productImages.length > 0) {
-                    await db.Images.bulkCreate(productImages)
+                    await db.Image.bulkCreate(productImages)
                 }
 
             
@@ -129,7 +128,7 @@ const controller = {
         try {
 
             const id = +req.params.id;
-            const product = await db.Products.findByPk(id);    
+            const product = await db.Product.findByPk(id);    
             
             let categories = await db.Category.findAll();
             let colors = await db.Color.findAll();
@@ -146,8 +145,8 @@ const controller = {
         try {
 
             let id = req.params.id;
-            await db.Products.destroy ({where: {id:id}});
-            await db.Images.destroy ({where: {productId:id}});
+            await db.Product.destroy ({where: {id:id}});
+            await db.Image.destroy ({where: {productId:id}});
             res.redirect("/");
         
         } catch (error) {
@@ -172,43 +171,38 @@ const controller = {
             }
 
         
-            await db.Products.update(objAux, {where:{id:id}})
+            await db.Product.update(objAux, {where:{id:id}})
 
             //
             if (req.files.length > 0) {
+                
                 for(let i = 0 ; i<req.files.length;i++) {
                     newImages.push({
                         name: req.files[i].filename,
                         productId: id
                     })
-            }
-                
+                }                
             
-                const oldImages = await db.Images.findAll({where: {productId: id}})
+                const oldImages = await db.Image.findAll({where: {productId: id}})
+
                 oldImages.forEach( image => {
                     fs.unlinkSync(path.resolve(__dirname, '../../public/images/'+image.name))
                 })
                 
-                await db.Images.destroy({where: {productId: id}})
-                await db.Images.bulkCreate(newImages)
+                await db.Image.destroy({where: {productId: id}})
+                await db.Image.bulkCreate(newImages)
+
             } 
 
-
-
-
             console.log (req.files)
-            console.log (req.file)
-            
+            console.log (req.file)            
             //
-
             res.redirect("/")
 
         } catch (error) {
             res.status(500).json({ error: error.message });
         }
     },
-
 }
-
 
 module.exports = controller;

@@ -1,5 +1,5 @@
 function adminMiddleware(req, res, next) {
-    if(res.locals.userLogged && res.locals.userLogged.roles_id == 1) {
+    if(res.locals.userLogged && res.locals.userLogged.roleId == 1) {
         next();
     }
 

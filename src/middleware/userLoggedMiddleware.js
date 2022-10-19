@@ -7,7 +7,7 @@ async function userLoggedMiddleware (req,res,next) {
     res.locals.isLogged = false
 
     const emailInCookie = req.cookies.email
-    const UserFromCookie = await db.Users.findOne ({
+    const UserFromCookie = await db.User.findOne ({
         where: {
             email: emailInCookie || " "
         }

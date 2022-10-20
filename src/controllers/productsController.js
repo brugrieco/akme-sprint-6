@@ -94,8 +94,8 @@ const controller = {
             name: name,
             description: description,
             price: price,
-            category_id: categoryId,
-			color_id: colorId
+            categoryId: categoryId,
+			colorId: colorId
         }
 
 		try {

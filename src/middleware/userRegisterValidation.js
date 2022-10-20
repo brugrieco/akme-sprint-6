@@ -4,8 +4,8 @@ const { error } = require('console');
 
 
 const validations =[
-    body('firstName').notEmpty() .withMessage('Ingresa un nombre'),
-    body('lastName').notEmpty() .withMessage('Ingresa un apellido'),
+    body('first_name').notEmpty() .withMessage('Ingresa un nombre'),
+    body('last_name').notEmpty() .withMessage('Ingresa un apellido'),
     
     body('email')
         .notEmpty() .withMessage('Ingresa un email').bail() 

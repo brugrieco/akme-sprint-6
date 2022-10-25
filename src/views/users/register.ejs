@@ -20,17 +20,17 @@
                 <% } %>
             <%}%>
                 <label for="firstName" class="form-label">Nombre</label>
-                <input type="text" name="first_name" id="firstName" value= <%= locals.oldData ? oldData.firstName : null %>> 
-                <% if (locals.errors && errors.firstName) { %>
-                    <p class = "errorMessage"> <%= errors.firstName.msg %> </p>
+                <input type="text" name="first_name" id="firstName" value= <%= locals.oldData ? oldData.first_name : null %>> 
+                <% if (locals.errors && errors.first_name) { %>
+                    <p class = "errorMessage"> <%= errors.first_name.msg %> </p>
                 <% } %>
             </div>
 
             <div class="form-div">
                 <label for="lastName" class="form-label">Apellido</label>
-                <input type="text" name="last_name" id="lastName" value= <%= locals.oldData ? oldData.lastName : null %>>
-                <% if (locals.errors && errors.lastName) { %>
-                    <p class = "errorMessage"> <%= errors.lastName.msg %> </p>
+                <input type="text" name="last_name" id="lastName" value= <%= locals.oldData ? oldData.last_name : null %>>
+                <% if (locals.errors && errors.last_name) { %>
+                    <p class = "errorMessage"> <%= errors.last_name.msg %> </p>
                 <% } %>
             </div>
     

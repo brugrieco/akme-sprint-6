@@ -68,11 +68,11 @@ const controller = {
 			    return res.render('products/productCreate', {
 				    errors:results.mapped(),
 				    oldData:req.body, categories, colors})		
+                }	
+                let {name, description, price, categoryId, colorId} = req.body
             } catch (error) {
-            res.status(500).json({ error: error.message });
-            }
-        }	
-		let {name, description, price, categoryId, colorId} = req.body
+                res.status(500).json({ error: error.message });
+        }
 		let objAux={
             name: name,
             description: description,
